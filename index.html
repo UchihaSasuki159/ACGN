@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>二次元观察</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/media.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/jq.js"></script>
+    <script src="js/ag.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="bgImg"></div>
+    <i class="fa fa-bars ph-button"></i>
+    <div class="nav">
+        <div class="inner">
+            <ul class="clear nav-menu">
+                <li><a href="javascript:;">二三次元</a></li>
+                <li>
+                    <a href="javascript:;">动漫下载</a>
+                    <ul class="nav-list">
+                        <li><a href="javascript:;">新番动漫</a></li>
+                        <li><a href="javascript:;">完结动画</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;">动漫音乐</a></li>
+                <li><a href="javascript:;">ACG资讯</a></li>
+                <li>
+                    <a href="javascript:;">萌百科</a>
+                    <ul class="nav-list">
+                        <li><a href="javascript:;">动漫漫评</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;">丹特丽安书架</a></li>
+                <li><a href="javascript:;">八卦吐槽</a></li>
+                <li><a href="javascript:;">23趣闻</a></li>
+                <li><a href="javascript:;">留言板</a></li>
+                <li class="right"><a href="javascript:;"><i class="fa fa-search"></i></a></li>
+            </ul>
+            <div class="input clear">
+                <p class="left"><i class="fa fa-soundcloud"></i>  【如果喜欢请按【Ctrl+D】收藏本站】</p>
+                <input class="right" type="text" placeholder="请输入关键字">
+            </div>
+        </div>
+    </div>
+    <ul class="ph-nav-menu">
+        <li><a href="javascript:;">二三次元</a></li>
+        <li>
+            <a href="javascript:;">动漫下载</a>
+            <ul class="nav-list">
+                <li><a href="javascript:;">新番动漫</a></li>
+                <li><a href="javascript:;">完结动画</a></li>
+            </ul>
+        </li>
+        <li><a href="javascript:;">动漫音乐</a></li>
+        <li><a href="javascript:;">ACG资讯</a></li>
+        <li>
+            <a href="javascript:;">萌百科</a>
+            <ul class="nav-list">
+                <li><a href="javascript:;">动漫漫评</a></li>
+            </ul>
+        </li>
+        <li><a href="javascript:;">丹特丽安书架</a></li>
+        <li><a href="javascript:;">八卦吐槽</a></li>
+        <li><a href="javascript:;">23趣闻</a></li>
+        <li><a href="javascript:;">留言板</a></li>
+    </ul>
+</div>
+<div class="main">
+    <div class="inner clear">
+        <img src="images/uouo.png" class="headImg">
+        <div class="section" ng-controller="sectionCtrl">
+            <div class="banner">
+                <div class="clear gallery">
+                    <div class="gallery_nav">
+                        <a rel="img1" href="javascript:;"><img src="images/7ac78.jpg" /></a>
+                        <a rel="img2" href="javascript:;"><img src="images/0376.jpg" /></a>
+                        <a rel="img3" href="javascript:;"><img src="images/956.jpg" /></a>
+                        <a rel="img4" href="javascript:;"><img src="images/8621.jpg" /></a>
+                        <a rel="img5" href="javascript:;"><img src="images/qWL.jpg" /></a>
+                    </div>
+
+                    <div class="gallery_output">
+                        <img id="img1" src="images/7ac78.jpg" />
+                        <img id="img2" src="images/0376.jpg" />
+                        <img id="img3" src="images/956.jpg" />
+                        <img id="img4" src="images/8621.jpg" />
+                        <img id="img5" src="images/qWL.jpg" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="list" ng-repeat="da in data |pageFilter:pageNum:pageSize">
+                <div class="title clear">
+                    <h3><span>{{da.type}}</span>{{da.title}}</h3>
+                    <!--<img src="images/new.gif">-->
+                </div>
+                <div class="content clear">
+                    <div class="pic">
+                        <img ng-src="{{da.imgUrl}}" class="pic">
+                    </div>
+                    <p>{{da.txt}}</p>
+                </div>
+                <ul class="icon clear">
+                    <li><i class="fa fa-adn"></i><a href="javascript:;">二次元</a></li>
+                    <li><i class="fa fa-clock-o"></i><a href="javascript:;">18小时前</a></li>
+                    <li><i class="fa fa-eye"></i><a href="javascript:;">67℃</a></li>
+                    <li><i class="fa fa-heart-o"></i><a href="javascript:;">1喜欢</a></li>
+                </ul>
+            </div>
+            <div class="list">
+                <ul class="clear page">
+                    <!--<li><a href="javascript:;" class="pre">上一页</a></li>-->
+                    <li ng-repeat="number in data| pageNavFilter:pageSize">
+                        <a href="javascript:;" ng-class="number==pageNum? 'active':''"
+                           ng-click="selectPage(number)">
+                        {{number}}</a>
+                    </li>
+                    <!--<li><a href="javascript:;" class="next">下一页</a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="aside">
+            <div class="list">
+                <ul class="clear">
+                    <li><a href="javascript:;"><i class="fa fa-weibo"></i></a></li>
+                    <li><a href="javascript:;"><i class="fa fa-wifi"></i></a></li>
+                </ul>
+            </div>
+            <div class="list">
+                <img src="images/005ORKfZgw1f5oql8bpccj30a002sweu.jpg">
+            </div>
+            <div class="list">
+                <a href="javascript:;"><img src="images/005ORKfZgw1f5qcbkkh0aj30a002s0sx.jpg"></a>
+            </div>
+            <div class="list">
+                <a href="javascript:;"><img src="images/005ORKfZgw1f74ucter1lj30a00ej77j.jpg"></a>
+            </div>
+            <div class="list">
+                <a href="javascript:;"><img src="images/aili2.jpg"></a>
+            </div>
+            <div class="list">
+                <a href="javascript:;"><img src="images/005ORKfZgw1f7ngw6xtj7j30a00dlgnj.jpg"></a>
+            </div>
+            <div class="list" ng-controller="partCtrl">
+                <dl>
+                    <dt>次元阅读</dt>
+                    <dd ng-repeat="da in data">
+                        <img ng-src="{{da.imgUrl}}">
+                        <p class="txt">{{da.txt}}</p>
+                        <span>{{da.time}}</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="link-wrap">
+                <div class="list link">
+                    <dl>
+                        <dt>友情链接</dt>
+                        <dd class="clear">
+                            <div class="left">
+                                <p><a href="javascript:;">ACGNX末日動漫資源庫</a></p>
+                                <p><a href="javascript:;">绅士学院</a></p>
+                            </div>
+                            <div class="right">
+                                <p><a href="javascript:;">初音社</a></p>
+                                <p><a href="javascript:;">动漫漫评</a></p>
+                                <p><a href="javascript:;">萌音</a></p>
+                            </div>
+                        </dd>
+                    </dl>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="inner">
+        <p>二三次元 本站的文章和资源来自互联网或者原创，按照CC BY-NC-SA 3.0 CN协议发布和共享，
+            转载或引用本站文章应遵循相同协议。本站默认遵循RCC协议,如果有侵犯版权的资源请尽快联系站长，
+            我们会在24h内删除有争议的资源。 · 站点地图 粤ICP备14066932号 站长统计</p>
+    </div>
+</div>
+<div class="return">
+    <i class="fa fa-arrow-up"></i>
+</div>
+<div class="search-box">
+    <div class="search-icon"></div>
+    <div class="search-input">
+        <div class="search-left"></div>
+        <form>
+            <input type="text" placeholder="请输入关键字">
+            <button>搜索</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
